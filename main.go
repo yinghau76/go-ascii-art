@@ -76,11 +76,7 @@ func NewAsciiArt(title string, img image.Image) *AsciiArt {
 var templates = template.Must(template.ParseFiles("new.html", "ascii-art.html"))
 
 func NewHandler(rw http.ResponseWriter, req *http.Request) {
-	err := templates.ExecuteTemplate(rw, "new.html", nil)
-	if err != nil {
-		http.Error(rw, err.Error(), http.StatusInternalServerError)
-		return
-	}
+	renderTemplate(rw, "new", nil)
 }
 
 func UploadHandler(rw http.ResponseWriter, req *http.Request) {
@@ -99,8 +95,11 @@ func UploadHandler(rw http.ResponseWriter, req *http.Request) {
 	}
 
 	aa := NewAsciiArt(header.Filename, img)
+	renderTemplate(rw, "ascii-art", aa)
+}
 
-	err = templates.ExecuteTemplate(rw, "ascii-art.html", aa)
+func renderTemplate(rw http.ResponseWriter, name string, data interface{}) error {
+	err = templates.ExecuteTemplate(rw, name+".html", data)
 	if err != nil {
 		http.Error(rw, err.Error(), http.StatusInternalServerError)
 		return
