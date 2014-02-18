@@ -111,9 +111,12 @@ func renderTemplate(rw http.ResponseWriter, name string, data interface{}) error
 	return nil
 }
 
-func main() {
+func init() {
 	http.HandleFunc("/art/", UploadHandler)
 	http.HandleFunc("/", NewHandler)
+}
+
+func main() {
 	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 	if err != nil {
 		log.Fatal("Failed to start HTTP server:", err.Error())
