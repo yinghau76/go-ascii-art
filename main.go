@@ -10,6 +10,7 @@ import (
 	_ "image/png"
 	"log"
 	"net/http"
+	"os"
 )
 
 type AsciiArt struct {
@@ -113,7 +114,7 @@ func renderTemplate(rw http.ResponseWriter, name string, data interface{}) error
 func main() {
 	http.HandleFunc("/art/", UploadHandler)
 	http.HandleFunc("/", NewHandler)
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 	if err != nil {
 		log.Fatal("Failed to start HTTP server:", err.Error())
 	}
