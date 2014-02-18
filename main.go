@@ -99,11 +99,12 @@ func UploadHandler(rw http.ResponseWriter, req *http.Request) {
 }
 
 func renderTemplate(rw http.ResponseWriter, name string, data interface{}) error {
-	err = templates.ExecuteTemplate(rw, name+".html", data)
+	err := templates.ExecuteTemplate(rw, name+".html", data)
 	if err != nil {
 		http.Error(rw, err.Error(), http.StatusInternalServerError)
-		return
+		return err
 	}
+	return nil
 }
 
 func main() {
