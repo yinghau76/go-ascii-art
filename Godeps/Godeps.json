@@ -1,6 +1,6 @@
 {
-	"ImportPath": "simplypatrick/go-ascii-art",
-	"GoVersion": "go1.2",
+	"ImportPath": "github.com/yinghau76/go-ascii-art",
+	"GoVersion": "go1.4.2",
 	"Deps": [
 		{
 			"ImportPath": "github.com/nfnt/resize",
