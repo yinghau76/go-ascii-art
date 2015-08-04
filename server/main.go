@@ -7,7 +7,7 @@ import (
 	"os"
 	"text/template"
 
-	asciiart "github.com/yinghau76/go-ascii-art"
+	"github.com/yinghau76/go-ascii-art"
 )
 
 var templates = template.Must(template.ParseFiles("new.html", "ascii-art.html"))

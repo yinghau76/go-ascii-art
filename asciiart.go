@@ -1,3 +1,4 @@
+// Package asciiart can generate ASCII art from provided image.
 package asciiart
 
 import (
@@ -16,15 +17,15 @@ type AsciiArt struct {
 }
 
 const (
-	BLACK      = '@'
-	CHARCOAL   = '#'
-	DARKGRAY   = '8'
-	MEDIUMGRAY = '&'
-	MEDIUM     = 'o'
-	GRAY       = ':'
-	SLATEGRAY  = '*'
-	LIGHTGRAY  = '.'
-	WHITE      = ' '
+	sBLACK      = '@'
+	sCHARCOAL   = '#'
+	sDARKGRAY   = '8'
+	sMEDIUMGRAY = '&'
+	sMEDIUM     = 'o'
+	sGRAY       = ':'
+	sSLATEGRAY  = '*'
+	sLIGHTGRAY  = '.'
+	sWHITE      = ' '
 )
 
 // Reference: http://www.codeproject.com/Articles/20435/Using-C-To-Generate-ASCII-Art-From-An-Image
@@ -43,23 +44,23 @@ func generateAsciiArt(img image.Image) string {
 			r, _, _, _ := gray.At(x, y).RGBA()
 			r /= 256
 			if r >= 230 {
-				art[pos] = WHITE
+				art[pos] = sWHITE
 			} else if r >= 200 {
-				art[pos] = LIGHTGRAY
+				art[pos] = sLIGHTGRAY
 			} else if r >= 180 {
-				art[pos] = SLATEGRAY
+				art[pos] = sSLATEGRAY
 			} else if r >= 160 {
-				art[pos] = GRAY
+				art[pos] = sGRAY
 			} else if r >= 130 {
-				art[pos] = MEDIUM
+				art[pos] = sMEDIUM
 			} else if r >= 100 {
-				art[pos] = MEDIUMGRAY
+				art[pos] = sMEDIUMGRAY
 			} else if r >= 70 {
-				art[pos] = DARKGRAY
+				art[pos] = sDARKGRAY
 			} else if r >= 50 {
-				art[pos] = CHARCOAL
+				art[pos] = sCHARCOAL
 			} else {
-				art[pos] = BLACK
+				art[pos] = sBLACK
 			}
 			pos++
 		}
@@ -70,6 +71,7 @@ func generateAsciiArt(img image.Image) string {
 	return string(art)
 }
 
+// New creates an ASCII art from an image
 func New(title string, img image.Image) *AsciiArt {
 	return &AsciiArt{title, generateAsciiArt(img)}
 }
